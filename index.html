@@ -1845,7 +1845,7 @@ async function redirectToIzipay() {
 
     // Use the formToken URL from Izipay (the correct way)
     // The backend returns the formToken; we use the Izipay standard redirect URL
-    const izipayRedirectUrl = 'https://secure.micuentaweb.pe/t/6rz0fra7' + encodeURIComponent(data.formToken);
+    const izipayRedirectUrl = 'https://secure.micuentaweb.pe/t/szf9tmo5' + encodeURIComponent(data.formToken);
 
     // Save data to localStorage before leaving
     db.set('pending_order', currentOrder);
