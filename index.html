@@ -829,105 +829,120 @@ select.finput option { background: #141421; }
 .empty-state svg { width: 24px; height: 24px; opacity: .26; display: block; margin: 0 auto 7px; }
 
 /* ═══════════════════════════════
-   CURRENCY BOX
+   IZIPAY CHECKOUT UI
 ═══════════════════════════════ */
-.currency-box {
-  display: flex; align-items: center; gap: 10px;
-  padding: 11px 14px; margin-bottom: 14px;
-  background: linear-gradient(135deg,rgba(200,255,87,.07),rgba(124,92,252,.06));
-  border: 1px solid rgba(200,255,87,.18); border-radius: 12px;
+
+/* Summary bar */
+.iz-summary {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; margin-bottom: 14px;
+  background: linear-gradient(135deg,rgba(200,255,87,.08),rgba(124,92,252,.06));
+  border: 1px solid rgba(200,255,87,.2); border-radius: 14px;
 }
-.currency-flag { font-size: 1.6rem; line-height: 1; flex-shrink: 0; }
-.currency-info { flex: 1; min-width: 0; }
-.currency-amount { font-family: 'Montserrat', sans-serif; font-size: 1.15rem; font-weight: 900; color: var(--ac); }
-.currency-sub { font-size: .65rem; color: var(--mu); margin-top: 1px; }
-.currency-badge {
-  display: inline-flex; align-items: center; gap: 4px;
-  padding: 3px 9px; background: rgba(200,255,87,.08); border: 1px solid rgba(200,255,87,.18);
-  border-radius: 999px; font-size: .6rem; font-weight: 700; color: var(--ac); white-space: nowrap; flex-shrink: 0;
+.iz-sum-label { font-size: .6rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--mu); margin-bottom: 3px; }
+.iz-sum-amount { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--ac); line-height: 1; }
+.iz-sum-sub { font-size: .65rem; color: var(--mu); margin-top: 4px; }
+.iz-sum-right { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
+.iz-sum-flag { font-size: 1.8rem; line-height: 1; }
+.iz-badges { display: flex; gap: 5px; }
+.iz-badge-ssl, .iz-badge-pci {
+  padding: 2px 7px; border-radius: 999px; font-size: .55rem; font-weight: 700;
+  letter-spacing: .05em;
+}
+.iz-badge-ssl { background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.25); color: #4ade80; }
+.iz-badge-pci { background: rgba(124,92,252,.1); border: 1px solid rgba(124,92,252,.25); color: #a78bfa; }
+
+/* Card logos */
+.iz-cards-row {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; gap: 10px;
+}
+.iz-cards-label { font-size: .63rem; color: var(--mu); font-weight: 600; white-space: nowrap; }
+.iz-cards-logos { display: flex; gap: 6px; align-items: center; }
+.iz-card-logo {
+  height: 26px; padding: 0 8px;
+  border-radius: 5px; display: flex; align-items: center; justify-content: center;
+  font-size: .6rem; font-weight: 900; letter-spacing: .04em; border: 1px solid rgba(255,255,255,.1);
+}
+.iz-visa { background: #1a1f71; color: #fff; }
+.iz-mc { background: #252525; position: relative; overflow: visible; width: 38px; padding: 0; }
+.mc-l, .mc-r { position: absolute; width: 16px; height: 16px; border-radius: 50%; top: 50%; transform: translateY(-50%); }
+.mc-l { background: #eb001b; left: 5px; }
+.mc-r { background: #f79e1b; right: 5px; opacity: .9; }
+.iz-amex { background: #2671b9; color: #fff; }
+.iz-diners { background: #1c3a6e; color: #fff; }
+
+/* Loading */
+.iz-loading-box {
+  display: flex; align-items: center; justify-content: center;
+  padding: 28px; background: var(--s2); border: 1px solid var(--b1);
+  border-radius: 14px; margin-bottom: 4px;
+}
+.iz-loading-inner { display: flex; align-items: center; gap: 14px; }
+
+/* Form sections */
+.iz-form-section { margin-bottom: 12px; }
+.iz-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.iz-field-label {
+  display: flex; align-items: center; gap: 5px;
+  font-size: .62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .09em; color: var(--mu); margin-bottom: 6px;
+}
+.iz-field-wrap {
+  background: var(--s2); border: 1.5px solid var(--b2); border-radius: 11px;
+  overflow: hidden; transition: border-color .2s, box-shadow .2s;
+  min-height: 44px; position: relative;
+}
+.iz-field-wrap:focus-within {
+  border-color: rgba(200,255,87,.5);
+  box-shadow: 0 0 0 3px rgba(200,255,87,.08);
 }
 
-/* ─── IZIPAY REDIRECT INFO ─── */
-.izipay-redirect-info {
-  display: flex; align-items: flex-start; gap: 13px;
-  padding: 14px 15px; margin-bottom: 4px;
-  background: var(--s2); border: 1px solid var(--b2); border-radius: 13px;
-}
-.iri-icon {
-  width: 48px; height: 48px; flex-shrink: 0; border-radius: 12px;
-  background: rgba(227,6,19,.09); border: 1px solid rgba(227,6,19,.2);
-  display: flex; align-items: center; justify-content: center; color: #f87171;
-}
-.iri-title { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .83rem; margin-bottom: 4px; }
-.iri-sub { font-size: .72rem; color: var(--mu); line-height: 1.55; }
-.izipay-redirect-note {
-  display: flex; align-items: center; gap: 6px;
-  font-size: .67rem; color: var(--mu); margin-top: 9px; text-align: center; justify-content: center;
-}
-.izipay-redirect-note svg { flex-shrink: 0; }
-.card-brands {
-  display: flex; align-items: center; gap: 7px; margin: 10px 0 12px;
-  font-size: .65rem; color: var(--mu);
-}
-.card-brands svg { border-radius: 4px; opacity: .7; transition: opacity .2s; }
-.card-brands svg:hover { opacity: 1; }
-
-/* ─── KR EMBEDDED FORM (Izipay) ─── */
-.kr-embedded {
+/* KR overrides */
+.kr-embedded { background: transparent !important; padding: 0 !important; }
+.kr-embedded > * { margin: 0 !important; }
+.kr-field-wrapper, .kr-field {
   background: transparent !important;
-}
-.kr-form-card {
-  background: var(--s2) !important;
-  border: 1px solid var(--b2) !important;
-  border-radius: 12px !important;
-  padding: 14px !important;
-}
-.kr-field-wrapper,
-.kr-field {
-  background: var(--s2) !important;
-  border: 1px solid var(--b2) !important;
-  border-radius: 10px !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 12px 13px !important;
   color: var(--tx) !important;
+  min-height: 44px !important;
+  width: 100% !important;
 }
-.kr-field-wrapper:focus-within {
-  border-color: rgba(200,255,87,.4) !important;
-  box-shadow: 0 0 0 3px rgba(200,255,87,.07) !important;
-}
-.kr-label {
-  color: var(--mu) !important;
-  font-family: 'DM Sans', sans-serif !important;
-  font-size: .63rem !important;
-  font-weight: 700 !important;
-  text-transform: uppercase !important;
-  letter-spacing: .09em !important;
+.kr-label { display: none !important; }
+.kr-pan, .kr-expiry, .kr-security-code,
+.kr-card-holder-name, .kr-installment-number {
+  display: block !important;
+  width: 100% !important;
+  min-height: 44px !important;
 }
 .kr-payment-button {
   background: var(--ac) !important;
   color: #000 !important;
   font-family: 'Montserrat', sans-serif !important;
   font-weight: 800 !important;
-  font-size: .88rem !important;
+  font-size: .9rem !important;
   border-radius: 12px !important;
   padding: 13px !important;
   letter-spacing: .04em !important;
   border: none !important;
   width: 100% !important;
   cursor: pointer !important;
-  box-shadow: 0 4px 18px rgba(200,255,87,.2) !important;
-  margin-top: 4px !important;
+  box-shadow: 0 4px 18px rgba(200,255,87,.25) !important;
+  margin-top: 8px !important;
+  display: block !important;
+  text-transform: uppercase !important;
 }
-.kr-payment-button:hover {
-  opacity: .87 !important;
-}
-.kr-icon-wrapper-field svg,
-.kr-icon-field svg {
-  fill: var(--mu) !important;
-}
+.kr-payment-button:hover { opacity: .87 !important; }
+.kr-icon-wrapper-field svg, .kr-icon-field svg { fill: var(--mu) !important; }
 .kr-form-error {
-  color: #f87171 !important;
-  font-size: .78rem !important;
-  padding: 6px 0 !important;
+  color: #f87171 !important; font-size: .78rem !important;
+  padding: 6px 2px !important; display: block !important;
 }
+
+/* currency-amount still used by updateCurrency */
+.currency-amount { font-family: 'Montserrat', sans-serif; font-size: 1.4rem; font-weight: 900; color: var(--ac); }
 
 
 .toast {
@@ -1204,50 +1219,93 @@ select.finput option { background: #141421; }
         </div>
 
         <!-- Izipay — redirigir al checkout seguro -->
+        <!-- Izipay embedded checkout -->
         <div id="pm-detail-izipay">
-          <!-- currency box -->
-          <div class="currency-box" id="currency-box">
-            <div class="currency-flag" id="currency-flag">🇵🇪</div>
-            <div class="currency-info">
-              <div class="currency-amount" id="currency-amount">S/ 1.00</div>
-              <div class="currency-sub" id="currency-sub">Precio en tu moneda local</div>
+
+          <!-- Resumen de cobro -->
+          <div class="iz-summary">
+            <div class="iz-sum-left">
+              <div class="iz-sum-label">Total a pagar</div>
+              <div class="iz-sum-amount" id="currency-amount">S/ 1.00</div>
+              <div class="iz-sum-sub" id="currency-sub">Pago único · acceso de por vida</div>
             </div>
-            <div class="currency-badge">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="10" height="10"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
-              Auto
+            <div class="iz-sum-right">
+              <div class="iz-sum-flag" id="currency-flag">🇵🇪</div>
+              <div class="iz-badges">
+                <span class="iz-badge-ssl">🔒 SSL</span>
+                <span class="iz-badge-pci">PCI DSS</span>
+              </div>
             </div>
           </div>
 
-          <!-- Loading state -->
-          <div id="iz-loading" style="display:flex;flex-direction:column;align-items:center;gap:10px;padding:24px">
-            <div class="spinner"></div>
-            <p style="font-size:.78rem;color:var(--mu)">Preparando formulario seguro...</p>
+          <!-- Cards aceptadas -->
+          <div class="iz-cards-row">
+            <span class="iz-cards-label">Tarjetas aceptadas</span>
+            <div class="iz-cards-logos">
+              <div class="iz-card-logo iz-visa">VISA</div>
+              <div class="iz-card-logo iz-mc"><span class="mc-l"></span><span class="mc-r"></span></div>
+              <div class="iz-card-logo iz-amex">AMEX</div>
+              <div class="iz-card-logo iz-diners">DINERS</div>
+            </div>
           </div>
 
-          <!-- KR embedded form — Izipay inyecta aquí -->
-          <div id="iz-form-wrap" style="visibility:hidden;opacity:0;height:0;overflow:hidden;transition:opacity .3s">
-            <div class="kr-embedded" kr-hide-debug-toolbar>
-              <div class="kr-pan"></div>
-              <div class="kr-expiry"></div>
-              <div class="kr-security-code"></div>
-              <div class="kr-installment-number"></div>
-              <button class="kr-payment-button"></button>
-              <div class="kr-form-error"></div>
+          <!-- Loading -->
+          <div id="iz-loading" class="iz-loading-box">
+            <div class="iz-loading-inner">
+              <div class="spinner"></div>
+              <div>
+                <div style="font-size:.82rem;font-weight:600;color:var(--tx)">Preparando pago seguro</div>
+                <div style="font-size:.71rem;color:var(--mu);margin-top:2px">Conectando con Izipay...</div>
+              </div>
             </div>
           </div>
 
           <!-- Error box -->
           <div class="izipay-err-box" id="iz-err"></div>
 
-          <!-- Accepted cards -->
-          <div class="card-brands" style="margin:10px 0 4px">
-            <span>Aceptamos</span>
-            <svg viewBox="0 0 60 38" fill="none" height="20"><rect width="60" height="38" rx="4" fill="#1a1f71"/><text x="30" y="26" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold" fill="white" letter-spacing="1">VISA</text></svg>
-            <svg viewBox="0 0 60 38" fill="none" height="20"><rect width="60" height="38" rx="4" fill="#252525"/><circle cx="23" cy="19" r="11" fill="#eb001b"/><circle cx="37" cy="19" r="11" fill="#f79e1b" opacity=".85"/></svg>
-            <svg viewBox="0 0 60 38" fill="none" height="20"><rect width="60" height="38" rx="4" fill="#2671b9"/><text x="30" y="26" text-anchor="middle" font-family="Arial" font-size="9" font-weight="bold" fill="white">AMEX</text></svg>
+          <!-- KR FORM — formToken se inyecta en kr-form-token via JS -->
+          <div id="iz-form-wrap" style="display:none">
+            <div class="kr-embedded" id="kr-embedded-div" kr-hide-debug-toolbar>
+              <div class="iz-form-section">
+                <div class="iz-field-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                  Número de tarjeta
+                </div>
+                <div class="iz-field-wrap"><div class="kr-pan"></div></div>
+              </div>
+              <div class="iz-form-row">
+                <div class="iz-form-section">
+                  <div class="iz-field-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    Vencimiento
+                  </div>
+                  <div class="iz-field-wrap"><div class="kr-expiry"></div></div>
+                </div>
+                <div class="iz-form-section">
+                  <div class="iz-field-label">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    CVV / CVC
+                  </div>
+                  <div class="iz-field-wrap"><div class="kr-security-code"></div></div>
+                </div>
+              </div>
+              <div class="iz-form-section">
+                <div class="iz-field-label">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                  Nombre del titular
+                </div>
+                <div class="iz-field-wrap"><div class="kr-card-holder-name"></div></div>
+              </div>
+              <div class="iz-form-section" id="iz-installment-wrap" style="display:none">
+                <div class="iz-field-label">Cuotas</div>
+                <div class="iz-field-wrap"><div class="kr-installment-number"></div></div>
+              </div>
+              <div class="kr-form-error"></div>
+              <button class="kr-payment-button"></button>
+            </div>
           </div>
 
-          <div style="display:flex;align-items:center;gap:6px;font-size:.66rem;color:var(--mu);margin-top:6px">
+          <div style="display:flex;align-items:center;justify-content:center;gap:6px;font-size:.65rem;color:var(--mu);margin-top:12px">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
             Pago procesado por Izipay · PCI DSS Nivel 1 · SSL 256-bit
           </div>
@@ -1809,7 +1867,7 @@ function selectPM(m) {
     const wrap    = document.getElementById('iz-form-wrap');
     const errEl   = document.getElementById('iz-err');
     if (loading) loading.style.display = 'flex';
-    if (wrap)    { wrap.style.visibility='hidden'; wrap.style.opacity='0'; wrap.style.height='0'; }
+    if (wrap)    wrap.style.display = 'none';
     if (errEl)   { errEl.classList.remove('show'); errEl.textContent = ''; }
   }
 
@@ -1875,7 +1933,7 @@ async function initKRForm() {
   errEl.classList.remove('show');
   errEl.textContent = '';
   if (loading) loading.style.display = 'flex';
-  if (wrap)    { wrap.style.visibility='hidden'; wrap.style.opacity='0'; wrap.style.height='0'; }
+  if (wrap)    wrap.style.display = 'none';
 
   try {
     // 1. Guardar pendiente en BD
@@ -1912,10 +1970,19 @@ async function initKRForm() {
     const data = await res.json();
     if (!data.formToken) throw new Error(data.error || 'Sin formToken de Izipay');
 
-    // 3. Configurar el SDK con el formToken
+    // 3. Inyectar formToken en el div kr-embedded (método oficial de Izipay)
+    const krDiv = document.getElementById('kr-embedded-div');
+    krDiv.setAttribute('kr-form-token', data.formToken);
+
+    // 4. Aplicar también via setFormConfig para que el SDK lo detecte inmediatamente
     await KR.setFormConfig({ formToken: data.formToken });
 
-    // 4. Registrar onSubmit — analizar resultado del pago
+    // 5. Mostrar formulario ANTES de registrar callbacks (Izipay necesita el DOM visible)
+    if (loading) loading.style.display = 'none';
+    if (wrap)    wrap.style.display = 'block';
+    krReady = true;
+
+    // 6. Registrar onSubmit
     KR.onSubmit(paymentData => {
       console.log('KR result:', JSON.stringify({
         status: paymentData?.clientAnswer?.orderStatus,
@@ -1931,7 +1998,7 @@ async function initKRForm() {
         errEl.textContent = '⚠️ ' + msg;
         errEl.classList.add('show');
       }
-      return false; // no redirigir, manejamos nosotros
+      return false; // no redirigir
     });
 
     KR.onError(err => {
@@ -1940,11 +2007,6 @@ async function initKRForm() {
       errEl.textContent = '⚠️ ' + msg;
       errEl.classList.add('show');
     });
-
-    // 5. Mostrar formulario
-    if (loading) loading.style.display = 'none';
-    if (wrap)    { wrap.style.visibility='visible'; wrap.style.opacity='1'; wrap.style.height='auto'; }
-    krReady = true;
 
   } catch (err) {
     console.error('KR init error:', err);
