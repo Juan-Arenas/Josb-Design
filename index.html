@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Joss Design — Curso</title>
 <link rel="icon" type="image/png" href="Joss.png"/>
-<link rel="apple-touch-icon" href="Joss.png"/>
+<link rel="icon" type="image/png" sizes="32x32" href="Joss.png"/>
+<link rel="icon" type="image/png" sizes="16x16" href="Joss.png"/>
+<link rel="shortcut icon" href="Joss.png"/>
+<link rel="apple-touch-icon" sizes="180x180" href="Joss.png"/>
 <meta name="theme-color" content="#08080f"/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
 <!-- Izipay SDK -->
@@ -1238,6 +1241,316 @@ select.finput option { background: #141421; }
   .mob-header { display: none !important; }
   .sb-backdrop { display: none !important; }
 }
+
+/* ═══════════════════════════════
+   MÓDULOS — ESTRUCTURA DE CURSOS
+═══════════════════════════════ */
+.module-block {
+  margin-bottom: 36px;
+}
+.module-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.module-num {
+  font-family: 'Montserrat', sans-serif;
+  font-size: .6rem; font-weight: 900;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--ac); background: rgba(200,255,87,.08);
+  border: 1px solid rgba(200,255,87,.2);
+  padding: 3px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.module-title-text {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem; font-weight: 800; color: var(--tx);
+  line-height: 1.2;
+}
+.module-title-text em { font-style: normal; color: var(--ac); }
+.module-divider {
+  flex: 1; height: 1px;
+  background: linear-gradient(90deg, rgba(200,255,87,.15), transparent);
+}
+.module-coming {
+  font-size: .65rem; color: var(--mu);
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 999px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--b1);
+}
+
+/* Video intro destacado */
+.intro-card {
+  background: linear-gradient(135deg, #0d0d22, #12122e, #0f1428);
+  border: 1px solid rgba(200,255,87,.22);
+  border-radius: 20px; overflow: hidden;
+  display: flex; align-items: stretch;
+  margin-bottom: 36px; position: relative;
+  cursor: pointer; transition: box-shadow .3s, transform .2s;
+}
+.intro-card:hover {
+  box-shadow: 0 16px 50px rgba(200,255,87,.15), 0 0 0 1px rgba(200,255,87,.18);
+  transform: translateY(-2px);
+}
+.intro-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 20% 50%, rgba(200,255,87,.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 50%, rgba(124,92,252,.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+.intro-thumb {
+  width: 200px; min-height: 120px; flex-shrink: 0;
+  background: linear-gradient(135deg,#0a0a20,#111130);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.intro-thumb::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 50%, rgba(200,255,87,.2) 0%, transparent 60%);
+}
+.intro-play {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(200,255,87,.15); border: 2px solid rgba(200,255,87,.4);
+  backdrop-filter: blur(10px);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1;
+  transition: background .2s, transform .2s;
+}
+.intro-card:hover .intro-play {
+  background: var(--ac); border-color: var(--ac); transform: scale(1.08);
+}
+.intro-play svg { fill: var(--ac); width: 18px; height: 18px; margin-left: 3px; transition: fill .2s; }
+.intro-card:hover .intro-play svg { fill: #000; }
+.intro-info {
+  padding: 22px 24px; flex: 1; position: relative; z-index: 1;
+  display: flex; flex-direction: column; justify-content: center; gap: 8px;
+}
+.intro-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: .58rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .12em; color: var(--ac);
+  background: rgba(200,255,87,.08); border: 1px solid rgba(200,255,87,.2);
+  padding: 3px 10px; border-radius: 999px; align-self: flex-start;
+}
+.intro-badge::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ac); animation: blink 2s infinite;
+}
+.intro-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 1.1rem; color: var(--tx); line-height: 1.3;
+}
+.intro-sub { font-size: .78rem; color: var(--mu); line-height: 1.5; }
+.intro-cta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: .75rem; font-weight: 700; color: var(--ac); margin-top: 4px;
+}
+
+/* Video cards mejoradas dentro de módulos */
+.mod-video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 14px;
+}
+.mod-video-card {
+  background: var(--s2); border: 1px solid var(--b1);
+  border-radius: 16px; overflow: hidden;
+  transition: transform .25s, border-color .25s, box-shadow .25s;
+  position: relative; cursor: pointer;
+}
+.mod-video-card.unlocked:hover {
+  transform: translateY(-4px);
+  border-color: rgba(200,255,87,.25);
+  box-shadow: 0 12px 36px rgba(0,0,0,.4), 0 0 0 1px rgba(200,255,87,.1);
+}
+.mod-video-card.locked { cursor: default; opacity: .55; }
+.mod-thumb {
+  width: 100%; aspect-ratio: 16/9;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.mod-play {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.07); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,.15);
+  display: flex; align-items: center; justify-content: center;
+  position: relative; z-index: 1; transition: background .2s;
+}
+.mod-video-card.unlocked:hover .mod-play { background: var(--ac); }
+.mod-play svg { fill: white; width: 13px; height: 13px; margin-left: 2px; }
+.mod-video-card.unlocked:hover .mod-play svg { fill: #000; }
+.mod-ep-num {
+  position: absolute; top: 8px; left: 8px; z-index: 1;
+  font-family: 'Montserrat', sans-serif; font-size: .55rem; font-weight: 800;
+  color: rgba(255,255,255,.3); letter-spacing: .1em;
+}
+.mod-info { padding: 12px 14px 14px; }
+.mod-ep-tag {
+  font-size: .58rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--ac); margin-bottom: 4px;
+}
+.mod-info h4 {
+  font-family: 'Montserrat', sans-serif; font-size: .82rem;
+  font-weight: 700; line-height: 1.3; color: var(--tx);
+}
+
+/* ══ INSTALACIÓN ══ */
+.install-grid {
+  display: grid; grid-template-columns: 1fr; gap: 14px;
+}
+.install-card {
+  background: var(--s2); border: 1px solid var(--b1);
+  border-radius: 14px; padding: 18px 20px;
+  display: flex; align-items: center; gap: 16px;
+  transition: border-color .2s;
+}
+.install-card:hover { border-color: rgba(200,255,87,.2); }
+.install-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(200,255,87,.08); border: 1px solid rgba(200,255,87,.15);
+  display: flex; align-items: center; justify-content: center;
+}
+.install-icon svg { width: 20px; height: 20px; color: var(--ac); }
+.install-body { flex: 1; min-width: 0; }
+.install-title { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .88rem; color: var(--tx); margin-bottom: 3px; }
+.install-desc { font-size: .76rem; color: var(--mu); line-height: 1.5; }
+.install-badge {
+  padding: 3px 10px; border-radius: 999px; font-size: .58rem; font-weight: 700;
+  background: rgba(200,255,87,.08); border: 1px solid rgba(200,255,87,.18); color: var(--ac);
+  white-space: nowrap; flex-shrink: 0;
+}
+
+/* ══ GENERAR PROMPTS ══ */
+.prompt-hero {
+  background: linear-gradient(135deg, #0c0c1e, #111128);
+  border: 1px solid rgba(124,92,252,.25); border-radius: 18px;
+  padding: 28px 28px 24px; margin-bottom: 24px; position: relative; overflow: hidden;
+}
+.prompt-hero::before {
+  content: ''; position: absolute; top: -60px; right: -60px;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(124,92,252,.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+.prompt-hero-title {
+  font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 900;
+  color: var(--tx); margin-bottom: 6px; position: relative; z-index: 1;
+}
+.prompt-hero-title span { color: var(--ac2); }
+.prompt-hero-sub { font-size: .82rem; color: var(--mu); line-height: 1.6; position: relative; z-index: 1; }
+
+.prompt-input-wrap {
+  display: flex; gap: 10px; align-items: flex-end; margin-bottom: 20px;
+}
+.prompt-textarea-wrap {
+  flex: 1; position: relative;
+  background: var(--s2); border: 1.5px solid var(--b2);
+  border-radius: 14px; transition: border-color .2s, box-shadow .2s;
+  overflow: hidden;
+}
+.prompt-textarea-wrap:focus-within {
+  border-color: rgba(124,92,252,.5);
+  box-shadow: 0 0 0 3px rgba(124,92,252,.08), 0 0 20px rgba(124,92,252,.1);
+}
+.prompt-textarea {
+  width: 100%; padding: 14px 16px; background: transparent;
+  color: var(--tx); font-family: 'DM Sans', sans-serif; font-size: .88rem;
+  border: none; outline: none; resize: none; min-height: 56px; max-height: 120px;
+  line-height: 1.5;
+}
+.prompt-textarea::placeholder { color: var(--mu); }
+.prompt-send-btn {
+  flex-shrink: 0; width: 52px; height: 52px; border-radius: 14px;
+  background: var(--ac2); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity .2s, transform .15s;
+  box-shadow: 0 4px 16px rgba(124,92,252,.3);
+}
+.prompt-send-btn:hover { opacity: .85; transform: translateY(-1px); }
+.prompt-send-btn:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+.prompt-send-btn svg { width: 20px; height: 20px; fill: white; }
+
+.prompt-loading {
+  display: none; align-items: center; gap: 10px;
+  padding: 16px 18px; background: var(--s2); border: 1px solid var(--b1);
+  border-radius: 12px; margin-bottom: 16px;
+}
+.prompt-loading.show { display: flex; }
+.prompt-loading-dots {
+  display: flex; gap: 4px;
+}
+.prompt-loading-dots span {
+  width: 6px; height: 6px; border-radius: 50%; background: var(--ac2);
+  animation: dot-bounce .9s ease-in-out infinite;
+}
+.prompt-loading-dots span:nth-child(2) { animation-delay: .15s; }
+.prompt-loading-dots span:nth-child(3) { animation-delay: .3s; }
+@keyframes dot-bounce {
+  0%, 80%, 100% { transform: scale(.6); opacity: .4; }
+  40%           { transform: scale(1); opacity: 1; }
+}
+
+.prompt-result {
+  display: none; background: var(--s2);
+  border: 1px solid rgba(124,92,252,.2); border-radius: 14px;
+  overflow: hidden;
+}
+.prompt-result.show { display: block; }
+.prompt-result-header {
+  padding: 12px 16px; background: rgba(124,92,252,.08);
+  border-bottom: 1px solid rgba(124,92,252,.15);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.prompt-result-label {
+  font-size: .62rem; font-weight: 800; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--ac2);
+  display: flex; align-items: center; gap: 6px;
+}
+.prompt-result-label::before {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--ac2); animation: blink 2s infinite;
+}
+.prompt-copy-btn {
+  display: flex; align-items: center; gap: 5px; padding: 5px 12px;
+  border-radius: 8px; background: rgba(124,92,252,.12);
+  border: 1px solid rgba(124,92,252,.2); color: var(--ac2);
+  font-size: .68rem; font-weight: 700; cursor: pointer;
+  transition: background .2s;
+}
+.prompt-copy-btn:hover { background: rgba(124,92,252,.2); }
+.prompt-copy-btn svg { width: 12px; height: 12px; }
+.prompt-result-body {
+  padding: 18px 16px; font-size: .85rem; color: var(--tx);
+  line-height: 1.8; white-space: pre-wrap; font-family: 'DM Sans', sans-serif;
+}
+
+.prompt-examples {
+  margin-bottom: 20px;
+}
+.prompt-examples-label {
+  font-size: .62rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .1em; color: var(--mu); margin-bottom: 10px;
+}
+.prompt-chips {
+  display: flex; flex-wrap: wrap; gap: 7px;
+}
+.prompt-chip {
+  padding: 6px 13px; border-radius: 999px;
+  background: var(--s2); border: 1px solid var(--b2);
+  font-size: .73rem; color: var(--mu); cursor: pointer;
+  transition: border-color .2s, color .2s, background .2s;
+}
+.prompt-chip:hover {
+  border-color: rgba(124,92,252,.35); color: var(--tx);
+  background: rgba(124,92,252,.06);
+}
+
+@media (max-width: 768px) {
+  .intro-card { flex-direction: column; }
+  .intro-thumb { width: 100%; min-height: 140px; }
+  .mod-video-grid { grid-template-columns: 1fr; }
+  .prompt-input-wrap { flex-direction: column; }
+  .prompt-send-btn { width: 100%; height: 46px; border-radius: 12px; }
+}
 </style>
 </head>
 <body>
@@ -1746,6 +2059,10 @@ select.finput option { background: #141421; }
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
         Instalación
       </div>
+      <div class="nav-item" onclick="showPanel('prompts', this)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/><path d="M12 8v4M12 16h.01"/></svg>
+        Generar Prompts
+      </div>
       <div class="nav-item" onclick="showPanel('redes', this)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         Redes
@@ -1774,75 +2091,248 @@ select.finput option { background: #141421; }
 
       <!-- VIDEOS -->
       <div class="panel active" id="panel-videos">
-        <div class="section-title">Módulos del curso</div>
-        <div class="video-grid">
 
-          <div class="video-card" id="vc1">
-            <div class="thumb thumb-1">
-              <span class="vnum">01</span>
-              <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-            </div>
-            <div class="vinfo">
-              <div class="vtag">Módulo 01</div>
-              <h3>Introducción</h3>
-              <div class="vmeta"><span>Joss Design</span><span class="vmeta-dot"></span><span>Inicio del curso</span></div>
+        <!-- VIDEO INTRO DESTACADO -->
+        <div class="section-title">Introducción al curso</div>
+        <div class="intro-card" id="vc-intro" onclick="playVideo('intro')">
+          <div class="intro-thumb">
+            <div class="intro-play">
+              <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
             </div>
           </div>
-
-          <div class="video-card" id="vc2">
-            <div class="thumb thumb-2">
-              <span class="vnum">02</span>
-              <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-            </div>
-            <div class="vinfo">
-              <div class="vtag">Módulo 02</div>
-              <h3>Manejo de los Prompts en Gemini</h3>
-              <div class="vmeta"><span>Joss Design</span><span class="vmeta-dot"></span><span>IA &amp; Prompts</span></div>
+          <div class="intro-info">
+            <div class="intro-badge">Introducción</div>
+            <div class="intro-title">Bienvenido al Curso Joss Design</div>
+            <div class="intro-sub">Conoce la metodología, las herramientas y todo lo que aprenderás en este curso de diseño con IA.</div>
+            <div class="intro-cta">
+              Ver ahora
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="12" height="12"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </div>
           </div>
+        </div>
 
-          <div class="video-card" id="vc3">
-            <div class="thumb thumb-3">
-              <span class="vnum">03</span>
-              <div class="play-btn"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
-            </div>
-            <div class="vinfo">
-              <div class="vtag">Módulo 03</div>
-              <h3>Cómo Incorporar la IA en tus Diseños</h3>
-              <div class="vmeta"><span>Joss Design</span><span class="vmeta-dot"></span><span>Diseño + IA</span></div>
+        <!-- MÓDULO 01 -->
+        <div class="module-block">
+          <div class="module-header">
+            <div class="module-num">Módulo 01</div>
+            <div class="module-title-text">Manejo de los <em>Prompts</em> en Gemini</div>
+            <div class="module-divider"></div>
+          </div>
+          <div class="mod-video-grid">
+            <div class="mod-video-card" id="vc1" onclick="playVideo('m01v01')">
+              <div class="mod-thumb thumb-1">
+                <span class="mod-ep-num">EP 01</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Clase única</div>
+                <h4>Cómo manejar correctamente nuestros prompts</h4>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div class="video-card" id="vc4">
-            <div class="thumb thumb-4">
-              <span class="vnum">04</span>
-              <span class="coming-badge">Próximamente</span>
-              <div class="play-btn" style="opacity:.3;pointer-events:none"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+        <!-- MÓDULO 02 -->
+        <div class="module-block">
+          <div class="module-header">
+            <div class="module-num">Módulo 02</div>
+            <div class="module-title-text">Diseñando Desde <em>0</em> Con IA</div>
+            <div class="module-divider"></div>
+          </div>
+          <div class="mod-video-grid">
+            <div class="mod-video-card" id="vc2" onclick="playVideo('m02v01')">
+              <div class="mod-thumb thumb-2">
+                <span class="mod-ep-num">EP 01</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 1</div>
+                <h4>Introducción del módulo</h4>
+              </div>
             </div>
-            <div class="vinfo">
-              <div class="vtag">Módulo 04</div>
-              <h3>Video 4 — Próximamente</h3>
-              <div class="vmeta"><span>Joss Design</span><span class="vmeta-dot"></span><span>En preparación</span></div>
+            <div class="mod-video-card" id="vc3" onclick="playVideo('m02v02')">
+              <div class="mod-thumb thumb-3">
+                <span class="mod-ep-num">EP 02</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 2</div>
+                <h4>Estructura del diseño</h4>
+              </div>
             </div>
+            <div class="mod-video-card" id="vc4" onclick="playVideo('m02v03')">
+              <div class="mod-thumb thumb-4">
+                <span class="mod-ep-num">EP 03</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 3</div>
+                <h4>Armonización</h4>
+              </div>
+            </div>
+            <div class="mod-video-card" id="vc5" onclick="playVideo('m02v04')">
+              <div class="mod-thumb thumb-1">
+                <span class="mod-ep-num">EP 04</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 4</div>
+                <h4>Integración de información y ajustes finales</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 03 -->
+        <div class="module-block">
+          <div class="module-header">
+            <div class="module-num">Módulo 03</div>
+            <div class="module-title-text">Cómo Incorporar la <em>IA</em> en tus Diseños</div>
+            <div class="module-divider"></div>
+          </div>
+          <div class="mod-video-grid">
+            <div class="mod-video-card" id="vc6" onclick="playVideo('m03v01')">
+              <div class="mod-thumb thumb-2">
+                <span class="mod-ep-num">EP 01</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 1</div>
+                <h4>Método Joss Design</h4>
+              </div>
+            </div>
+            <div class="mod-video-card" id="vc7" onclick="playVideo('m03v02')">
+              <div class="mod-thumb thumb-3">
+                <span class="mod-ep-num">EP 02</span>
+                <div class="mod-play"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag">Episodio 2</div>
+                <h4>Tips con la IA</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MÓDULO 04 -->
+        <div class="module-block">
+          <div class="module-header">
+            <div class="module-num">Módulo 04</div>
+            <div class="module-title-text">Próximamente</div>
+            <div class="module-divider"></div>
+            <div class="module-coming">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              En preparación
+            </div>
+          </div>
+          <div class="mod-video-grid">
+            <div class="mod-video-card locked" id="vc8">
+              <div class="mod-thumb thumb-4">
+                <span class="mod-ep-num">EP 01</span>
+                <span class="coming-badge">Próximamente</span>
+                <div class="mod-play" style="opacity:.3"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+              </div>
+              <div class="mod-info">
+                <div class="mod-ep-tag" style="color:var(--mu)">Próximamente</div>
+                <h4 style="color:var(--mu)">Contenido en preparación</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- INSTALACION -->
+      <div class="panel" id="panel-instalacion">
+        <div class="section-title">Recursos &amp; Material</div>
+        <div class="install-grid">
+
+          <div class="install-card">
+            <div class="install-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div class="install-body">
+              <div class="install-title">Material Joss Design</div>
+              <div class="install-desc">Archivos, plantillas y recursos exclusivos del curso para que puedas practicar desde el primer día.</div>
+            </div>
+            <div class="install-badge">Próximamente</div>
+          </div>
+
+          <div class="install-card">
+            <div class="install-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+            </div>
+            <div class="install-body">
+              <div class="install-title">Guía de instalación de herramientas</div>
+              <div class="install-desc">Paso a paso para configurar todas las apps y extensiones que usarás en el curso.</div>
+            </div>
+            <div class="install-badge">Próximamente</div>
+          </div>
+
+          <div class="install-card">
+            <div class="install-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            </div>
+            <div class="install-body">
+              <div class="install-title">Recursos adicionales</div>
+              <div class="install-desc">Links, referencias y lecturas complementarias seleccionadas por Joss Design.</div>
+            </div>
+            <div class="install-badge">Próximamente</div>
           </div>
 
         </div>
       </div>
 
-      <!-- INSTALACION -->
-      <div class="panel" id="panel-instalacion">
-        <div class="section-title">Instalación</div>
-        <div class="placeholder">
-          <div class="ph-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>
-          </div>
-          <h2>Contenido en preparación</h2>
-          <p>Esta sección estará disponible muy pronto con guías de instalación y recursos.</p>
-          <div class="coming-pill">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            Próximamente
+      <!-- GENERAR PROMPTS -->
+      <div class="panel" id="panel-prompts">
+
+        <div class="prompt-hero">
+          <div class="prompt-hero-title">Generador de <span>Prompts</span> Profesionales</div>
+          <div class="prompt-hero-sub">Describe lo que necesitas y obtendrás un prompt optimizado y estructurado listo para usar en tus diseños con IA.</div>
+        </div>
+
+        <div class="prompt-examples">
+          <div class="prompt-examples-label">Ejemplos rápidos</div>
+          <div class="prompt-chips">
+            <div class="prompt-chip" onclick="useChip(this)">Mejorar calidad de imagen</div>
+            <div class="prompt-chip" onclick="useChip(this)">Crear logo minimalista</div>
+            <div class="prompt-chip" onclick="useChip(this)">Diseño de portada para red social</div>
+            <div class="prompt-chip" onclick="useChip(this)">Paleta de colores para marca</div>
+            <div class="prompt-chip" onclick="useChip(this)">Tipografía para app moderna</div>
+            <div class="prompt-chip" onclick="useChip(this)">Fondo abstracto con degradado</div>
           </div>
         </div>
+
+        <div class="prompt-input-wrap">
+          <div class="prompt-textarea-wrap">
+            <textarea class="prompt-textarea" id="prompt-input"
+              placeholder="Ej: Necesito un prompt para crear un logo moderno para una barbería..."
+              rows="2"
+              onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); generatePrompt(); }"></textarea>
+          </div>
+          <button class="prompt-send-btn" id="prompt-btn" onclick="generatePrompt()">
+            <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2L15 22 11 13 2 9l20-7z"/></svg>
+          </button>
+        </div>
+
+        <div class="prompt-loading" id="prompt-loading">
+          <div class="prompt-loading-dots">
+            <span></span><span></span><span></span>
+          </div>
+          <span style="font-size:.8rem;color:var(--mu)">Generando prompt profesional...</span>
+        </div>
+
+        <div class="prompt-result" id="prompt-result">
+          <div class="prompt-result-header">
+            <div class="prompt-result-label">Prompt generado</div>
+            <button class="prompt-copy-btn" onclick="copyPromptResult()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copiar
+            </button>
+          </div>
+          <div class="prompt-result-body" id="prompt-result-text"></div>
+        </div>
+
       </div>
 
       <!-- REDES -->
@@ -1969,9 +2459,10 @@ function closeSidebar() {
 
 /* ─── PANELS ─── */
 const panelTitles = {
-  videos     : { h: 'Mis <em>Videos</em>',     p: 'Aprende diseño e inteligencia artificial con Joss Design.' },
-  instalacion: { h: '<em>Instalación</em>',     p: 'Guías y recursos para configurar tu entorno.' },
-  redes      : { h: 'Nuestras <em>Redes</em>',  p: 'Conéctate con Joss Design en todas las plataformas.' }
+  videos     : { h: 'Mis <em>Videos</em>',           p: 'Aprende diseño e inteligencia artificial con Joss Design.' },
+  instalacion: { h: 'Recursos &amp; <em>Material</em>', p: 'Archivos, guías y todo lo que necesitas para el curso.' },
+  prompts    : { h: 'Generar <em>Prompts</em>',       p: 'Crea prompts profesionales optimizados para diseño con IA.' },
+  redes      : { h: 'Nuestras <em>Redes</em>',        p: 'Conéctate con Joss Design en todas las plataformas.' }
 };
 function showPanel(name, el) {
   document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
@@ -2460,7 +2951,7 @@ function setLoggedIn(email) {
 
 /* ─── LOCK / UNLOCK ─── */
 function lockCards() {
-  ['vc1','vc2','vc3'].forEach(id => {
+  ['vc1','vc2','vc3','vc4','vc5','vc6','vc7'].forEach(id => {
     const c = document.getElementById(id);
     if (!c || c.querySelector('.lock-overlay')) return;
     c.classList.add('locked');
@@ -2483,6 +2974,79 @@ function unlockCards() {
     const lo = c.querySelector('.lock-overlay');
     if (lo) lo.remove();
   });
+}
+
+/* ─── PLAY VIDEO ─── */
+function playVideo(id) {
+  const videos = {
+    'intro'  : '',
+    'm01v01' : '',
+    'm02v01' : '',
+    'm02v02' : '',
+    'm02v03' : '',
+    'm02v04' : '',
+    'm03v01' : '',
+    'm03v02' : '',
+  };
+  const url = videos[id];
+  if (url) {
+    window.open(url, '_blank');
+  } else {
+    toast('Video disponible próximamente', false);
+  }
+}
+
+/* ─── GENERAR PROMPTS (Gemini) ─── */
+const GEMINI_KEY = 'AIzaSyAqBiCRw2bw7Qpo2bWeLy3OjBg4oAykE_c';
+const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + GEMINI_KEY;
+const PROMPT_SYSTEM = `Eres un experto en diseño gráfico e inteligencia artificial. Crea prompts profesionales estructurados.
+Cuando el usuario te diga lo que necesita, genera un prompt optimizado siguiendo esta estructura interna:
+Sujeto principal → Estilo artístico → Composición visual → Paleta de colores → Ambiente/iluminación → Detalles técnicos → Keywords potenciadores.
+Responde SOLO con el prompt en un bloque fluido y profesional en español, sin numeración ni encabezados. Máximo 150 palabras.`;
+
+async function generatePrompt() {
+  const input = document.getElementById('prompt-input').value.trim();
+  if (!input) { toast('Escribe qué necesitas primero', false); return; }
+  const btn     = document.getElementById('prompt-btn');
+  const loading = document.getElementById('prompt-loading');
+  const result  = document.getElementById('prompt-result');
+  const resText = document.getElementById('prompt-result-text');
+  btn.disabled = true;
+  loading.classList.add('show');
+  result.classList.remove('show');
+  try {
+    const res = await fetch(GEMINI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{ role: 'user', parts: [{ text: PROMPT_SYSTEM + '\n\nNecesito un prompt para: ' + input }] }],
+        generationConfig: { temperature: 0.8, maxOutputTokens: 600 }
+      })
+    });
+    if (!res.ok) throw new Error('Error ' + res.status);
+    const data = await res.json();
+    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error('Sin respuesta');
+    resText.textContent = text;
+    result.classList.add('show');
+    toast('¡Prompt generado! ✨', true);
+  } catch(e) {
+    console.error('Gemini:', e);
+    toast('Error al generar. Intenta de nuevo.', false);
+  } finally {
+    btn.disabled = false;
+    loading.classList.remove('show');
+  }
+}
+
+function useChip(el) {
+  document.getElementById('prompt-input').value = el.textContent;
+  document.getElementById('prompt-input').focus();
+}
+
+function copyPromptResult() {
+  const text = document.getElementById('prompt-result-text').textContent;
+  copyTxt(text, document.querySelector('.prompt-copy-btn'));
 }
 
 /* ─── HELPERS ─── */
