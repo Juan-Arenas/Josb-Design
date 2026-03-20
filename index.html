@@ -1225,7 +1225,7 @@ select.finput option { background: #141421; }
           </div>
 
           <!-- KR embedded form — Izipay inyecta aquí -->
-          <div id="iz-form-wrap" style="display:none">
+          <div id="iz-form-wrap" style="visibility:hidden;opacity:0;height:0;overflow:hidden;transition:opacity .3s">
             <div class="kr-embedded" kr-hide-debug-toolbar>
               <div class="kr-pan"></div>
               <div class="kr-expiry"></div>
@@ -1809,7 +1809,7 @@ function selectPM(m) {
     const wrap    = document.getElementById('iz-form-wrap');
     const errEl   = document.getElementById('iz-err');
     if (loading) loading.style.display = 'flex';
-    if (wrap)    wrap.style.display    = 'none';
+    if (wrap)    { wrap.style.visibility='hidden'; wrap.style.opacity='0'; wrap.style.height='0'; }
     if (errEl)   { errEl.classList.remove('show'); errEl.textContent = ''; }
   }
 
@@ -1875,7 +1875,7 @@ async function initKRForm() {
   errEl.classList.remove('show');
   errEl.textContent = '';
   if (loading) loading.style.display = 'flex';
-  if (wrap)    wrap.style.display    = 'none';
+  if (wrap)    { wrap.style.visibility='hidden'; wrap.style.opacity='0'; wrap.style.height='0'; }
 
   try {
     // 1. Guardar pendiente en BD
@@ -1943,7 +1943,7 @@ async function initKRForm() {
 
     // 5. Mostrar formulario
     if (loading) loading.style.display = 'none';
-    if (wrap)    wrap.style.display    = 'block';
+    if (wrap)    { wrap.style.visibility='visible'; wrap.style.opacity='1'; wrap.style.height='auto'; }
     krReady = true;
 
   } catch (err) {
