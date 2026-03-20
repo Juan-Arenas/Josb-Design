@@ -301,47 +301,51 @@ app.put('/admin/config', adminOnly, async (req, res) => {
 });
 
 // ── Izipay create-payment ────────────────────────────────────
+// Payload exacto según docs oficiales (imagen 2 y 3):
+// { amount: 180, currency: "PEN", orderId: "myOrderId-999999", customer: { email: "..." } }
 app.post('/create-payment', async (req, res) => {
-  const { amount, currency='PEN', orderId, customer } = req.body;
+  const { amount, currency = 'PEN', orderId, customer } = req.body;
   if (!amount || amount <= 0) return res.status(400).json({ error: 'Monto inválido' });
 
-  // orderId: Izipay solo acepta letras y números, máx 32 chars
-  const cleanOrderId = (orderId || ('JD' + Date.now()))
-    .replace(/[^a-zA-Z0-9]/g, '')
-    .substring(0, 32);
+  const cleanOrderId = (orderId || ('JD-' + Date.now()))
+    .replace(/[^a-zA-Z0-9\-_]/g, '')
+    .substring(0, 64);
 
   try {
     const payload = {
-      amount      : parseInt(amount, 10),  // DEBE ser integer
-      currency    : currency,              // "PEN"
-      orderId     : cleanOrderId,
+      amount  : parseInt(amount, 10),   // integer obligatorio
+      currency: currency,               // "PEN"
+      orderId : cleanOrderId,           // alfanumérico + guiones
       customer: {
-        email     : customer?.email     || 'cliente@jossdesign.com',
-        firstName : customer?.firstName || 'Cliente',
-        lastName  : customer?.lastName  || 'Joss'
+        email    : customer?.email     || 'cliente@jossdesign.com',
+        firstName: customer?.firstName || 'Cliente',
+        lastName : customer?.lastName  || 'JossDesign'
       }
     };
 
-    console.log('Izipay payload:', JSON.stringify(payload));
+    console.log('[Izipay] Payload →', JSON.stringify(payload));
     const data = await izipayPost('/api-payment/V4/Charge/CreatePayment', payload);
-    console.log('Izipay response:', JSON.stringify(data));
+    console.log('[Izipay] Response →', JSON.stringify({
+      status: data.status,
+      hasToken: !!data.answer?.formToken,
+      error: data.answer?.errorMessage
+    }));
 
     if (data.status === 'SUCCESS' && data.answer?.formToken) {
       return res.json({
-        formToken  : data.answer.formToken,
-        cleanOrder : cleanOrderId
+        formToken : data.answer.formToken,
+        cleanOrder: cleanOrderId
       });
     }
 
-    // Loguear error completo para debug
     const errMsg = data.answer?.errorMessage
       || data.answer?.detailedErrorMessage
-      || JSON.stringify(data);
-    console.error('Izipay CreatePayment error:', errMsg);
+      || ('Izipay status: ' + data.status);
+    console.error('[Izipay] Error:', errMsg, JSON.stringify(data));
     return res.status(500).json({ error: errMsg });
 
   } catch (e) {
-    console.error('create-payment exception:', e.message);
+    console.error('[Izipay] Exception:', e.message);
     return res.status(500).json({ error: e.message });
   }
 });
