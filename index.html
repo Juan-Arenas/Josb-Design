@@ -13,8 +13,8 @@
   kr-public-key="19131378:publickey_FCreyHUK1syQokKpjc9lFXmSsWR1tdP1qOMnaekvTBLeS"
   kr-language="es-PE"
   kr-post-url-success="https://josb-design-production.up.railway.app/ipn"></script>
-<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/neon-reset.min.css"/>
-<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/neon.min.css"/>
+<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/classic-reset.min.css"/>
+<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/classic.min.css"/>
 <style>
 @property --angle {
   syntax: '<angle>';
@@ -1049,16 +1049,15 @@ select.finput option { background: #141421; }
   margin: 0 !important;
 }
 
-/* Cada campo */
+/* Cada campo — fondo claro para que classic theme de Izipay sea visible */
 .kr-field-wrapper {
   position: relative !important;
-  background: #0d0d1a !important;
-  border: 1.5px solid rgba(255,255,255,.09) !important;
+  background: #1e1e30 !important;
+  border: 1.5px solid rgba(255,255,255,.12) !important;
   border-radius: 12px !important;
-  padding: 22px 14px 8px !important;
+  padding: 4px 4px !important;
   margin-bottom: 10px !important;
-  min-height: 54px !important;
-  max-height: 58px !important;
+  min-height: 52px !important;
   transition: border-color .3s, box-shadow .3s !important;
   overflow: hidden !important;
   cursor: text !important;
@@ -2197,8 +2196,11 @@ async function initKRForm() {
     const krDiv = document.getElementById('kr-embedded-div');
     krDiv.setAttribute('kr-form-token', data.formToken);
 
-    // 4. Aplicar también via setFormConfig para que el SDK lo detecte inmediatamente
-    await KR.setFormConfig({ formToken: data.formToken });
+    // 4. Aplicar formToken y tema claro para que los campos sean visibles
+    await KR.setFormConfig({
+      formToken: data.formToken,
+      'kr-theme': 'classic'
+    });
 
     // 5. Mostrar formulario ANTES de registrar callbacks (Izipay necesita el DOM visible)
     if (loading) loading.style.display = 'none';
