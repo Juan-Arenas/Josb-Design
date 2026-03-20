@@ -27,7 +27,7 @@ const pool = new Pool({
 
 // ── Izipay config ────────────────────────────────────────────
 const SHOP_ID      = process.env.IZIPAY_SHOP_ID  || '19131378';
-const PASSWORD     = process.env.IZIPAY_PASSWORD || 'testpassword_Hbop1JNTY49sTwOQA8Nlk6Ki0rUNaoemV5clQPedkXRE';
+const PASSWORD     = process.env.IZIPAY_PASSWORD || 'prodpassword_4qOwaYvgLvrBWaqp1ny8qBX3so9mxQJBXBAxlWsGKvzP5';
 const API_URL      = process.env.IZIPAY_API_URL  || 'https://api.micuentaweb.pe';
 const AUTH         = 'Basic ' + Buffer.from(SHOP_ID + ':' + PASSWORD).toString('base64');
 const ADMIN_SECRET = process.env.ADMIN_SECRET    || 'jossdesign2025';
