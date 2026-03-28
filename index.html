@@ -838,8 +838,106 @@ select.finput option { background: #141421; }
 .btn-save:hover { opacity: .87; }
 .cfg-label { font-size: .63rem; font-weight: 700; color: var(--mu); text-transform: uppercase; letter-spacing: .09em; margin-bottom: 5px; display: block; }
 
-.empty-state { text-align: center; padding: 24px; color: var(--mu); font-size: .77rem; }
-.empty-state svg { width: 24px; height: 24px; opacity: .26; display: block; margin: 0 auto 7px; }
+/* ─── EDITOR DE CONTENIDO (Admin) ─── */
+.adm-box.blue { background: linear-gradient(135deg,rgba(56,189,248,.07),rgba(200,255,87,.04)); border: 1px solid rgba(56,189,248,.2); }
+.blue .adm-box-title svg { color: #38bdf8; }
+.content-editor { margin-top: 14px; }
+.ce-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
+.ce-tab {
+  padding: 6px 14px; border-radius: 999px; font-size: .72rem; font-weight: 700;
+  background: var(--s2); border: 1px solid var(--b2); color: var(--mu);
+  cursor: pointer; transition: all .2s; font-family: 'DM Sans', sans-serif;
+}
+.ce-tab:hover { border-color: rgba(56,189,248,.3); color: var(--tx); }
+.ce-tab.active { background: rgba(56,189,248,.1); border-color: rgba(56,189,248,.35); color: #38bdf8; }
+.ce-panel { display: none; }
+.ce-panel.active { display: block; }
+.ce-module-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 14px; background: var(--s2); border: 1px solid var(--b2);
+  border-radius: 10px; margin-bottom: 10px; gap: 10px;
+}
+.ce-module-title-wrap { flex: 1; display: flex; align-items: center; gap: 10px; }
+.ce-module-label { font-size: .65rem; font-weight: 700; color: #38bdf8; text-transform: uppercase; letter-spacing: .09em; white-space: nowrap; }
+.ce-module-inp {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: var(--tx); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: .88rem;
+  border-bottom: 1px solid var(--b2); padding: 2px 4px; transition: border-color .2s;
+}
+.ce-module-inp:focus { border-color: #38bdf8; }
+.btn-ce-save {
+  padding: 6px 14px; border-radius: 8px; background: rgba(56,189,248,.12);
+  border: 1px solid rgba(56,189,248,.25); color: #38bdf8;
+  font-size: .7rem; font-weight: 700; cursor: pointer; font-family: 'DM Sans', sans-serif;
+  transition: background .2s; white-space: nowrap; flex-shrink: 0;
+}
+.btn-ce-save:hover { background: rgba(56,189,248,.22); }
+.ce-video-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.ce-video-item {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: var(--bg); border: 1px solid var(--b1);
+  border-radius: 10px; transition: border-color .2s;
+}
+.ce-video-item:hover { border-color: var(--b2); }
+.ce-ep-badge {
+  font-size: .6rem; font-weight: 800; color: var(--ac);
+  background: rgba(200,255,87,.08); border: 1px solid rgba(200,255,87,.15);
+  border-radius: 6px; padding: 2px 7px; white-space: nowrap; flex-shrink: 0;
+}
+.ce-video-fields { flex: 1; display: flex; flex-direction: column; gap: 5px; min-width: 0; }
+.ce-inp-title {
+  background: transparent; border: none; border-bottom: 1px solid var(--b2);
+  color: var(--tx); font-family: 'DM Sans', sans-serif; font-size: .82rem;
+  outline: none; padding: 2px 4px; transition: border-color .2s; width: 100%;
+}
+.ce-inp-title:focus { border-color: var(--ac); }
+.ce-inp-url {
+  background: var(--s2); border: 1px solid var(--b2); border-radius: 6px;
+  color: var(--mu); font-family: 'DM Sans', sans-serif; font-size: .72rem;
+  outline: none; padding: 5px 9px; transition: all .2s; width: 100%;
+}
+.ce-inp-url:focus { border-color: rgba(200,255,87,.4); color: var(--tx); }
+.ce-inp-url::placeholder { color: var(--mu); opacity: .6; }
+.btn-ce-del {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(239,68,68,.08); border: 1px solid rgba(239,68,68,.15);
+  color: #f87171; cursor: pointer; display: flex; align-items: center;
+  justify-content: center; transition: background .2s;
+}
+.btn-ce-del:hover { background: rgba(239,68,68,.18); }
+.btn-ce-add {
+  display: flex; align-items: center; gap: 7px; padding: 9px 14px;
+  border-radius: 10px; background: rgba(200,255,87,.06); border: 1px dashed rgba(200,255,87,.25);
+  color: var(--ac); font-size: .76rem; font-weight: 700; cursor: pointer;
+  transition: all .2s; font-family: 'DM Sans', sans-serif; width: 100%;
+  justify-content: center;
+}
+.btn-ce-add:hover { background: rgba(200,255,87,.12); border-color: rgba(200,255,87,.4); }
+.ce-save-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 14px; padding: 10px 14px; background: rgba(200,255,87,.05);
+  border: 1px solid rgba(200,255,87,.15); border-radius: 10px;
+}
+.ce-save-hint { font-size: .7rem; color: var(--mu); }
+.btn-ce-publish {
+  padding: 9px 20px; border-radius: 10px; background: var(--ac); color: #000;
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .78rem;
+  border: none; cursor: pointer; transition: opacity .2s; display: flex;
+  align-items: center; gap: 6px;
+}
+.btn-ce-publish:hover { opacity: .85; }
+.ce-intro-fields { display: flex; flex-direction: column; gap: 8px; }
+.ce-intro-label { font-size: .63rem; font-weight: 700; color: var(--mu); text-transform: uppercase; letter-spacing: .09em; }
+.ce-inp-full {
+  background: var(--s2); border: 1px solid var(--b2); border-radius: 9px;
+  color: var(--tx); font-family: 'DM Sans', sans-serif; font-size: .83rem;
+  outline: none; padding: 10px 13px; transition: all .2s; width: 100%;
+}
+.ce-inp-full:focus { border-color: rgba(200,255,87,.4); box-shadow: 0 0 0 3px rgba(200,255,87,.07); }
+.ce-msg { font-size: .73rem; margin-top: 8px; padding: 7px 12px; border-radius: 8px; display: none; }
+.ce-msg.ok  { display: block; background: rgba(34,197,94,.1); color: #4ade80; border: 1px solid rgba(34,197,94,.2); }
+.ce-msg.err { display: block; background: rgba(239,68,68,.1); color: #f87171; border: 1px solid rgba(239,68,68,.2); }
+
 
 /* ═══════════════════════════════
    IZIPAY CHECKOUT UI
@@ -1754,6 +1852,106 @@ select.finput option { background: #141421; }
           </button>
         </div>
         <div class="adm-msg" id="mu-msg"></div>
+      </div>
+
+      <!-- ✏️ EDITOR DE CONTENIDO DEL CURSO -->
+      <div class="adm-box blue">
+        <div class="adm-box-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          Gestión de contenido del curso
+        </div>
+        <div class="adm-box-sub">Edita títulos, agrega o elimina videos y actualiza los URLs de cada módulo.</div>
+
+        <!-- Tabs por módulo -->
+        <div class="ce-tabs">
+          <button class="ce-tab active" onclick="ceSwitchTab('intro',this)">🎬 Intro</button>
+          <button class="ce-tab" onclick="ceSwitchTab('m01',this)">Módulo 01</button>
+          <button class="ce-tab" onclick="ceSwitchTab('m02',this)">Módulo 02</button>
+          <button class="ce-tab" onclick="ceSwitchTab('m03',this)">Módulo 03</button>
+          <button class="ce-tab" onclick="ceSwitchTab('m04',this)">Módulo 04</button>
+        </div>
+
+        <!-- TAB: Introducción -->
+        <div class="ce-panel active" id="ce-intro">
+          <div class="ce-intro-fields">
+            <div class="ce-intro-label">Título de la intro</div>
+            <input class="ce-inp-full" id="ce-intro-title" type="text" placeholder="Título del video de introducción"/>
+            <div class="ce-intro-label">Subtítulo / descripción</div>
+            <input class="ce-inp-full" id="ce-intro-sub" type="text" placeholder="Descripción breve del curso..."/>
+            <div class="ce-intro-label">URL del video</div>
+            <input class="ce-inp-full" id="ce-intro-url" type="url" placeholder="https://..."/>
+          </div>
+        </div>
+
+        <!-- TAB: Módulo 01 -->
+        <div class="ce-panel" id="ce-m01">
+          <div class="ce-module-header">
+            <div class="ce-module-title-wrap">
+              <span class="ce-module-label">Módulo 01</span>
+              <input class="ce-module-inp" id="ce-m01-title" type="text" placeholder="Título del módulo"/>
+            </div>
+          </div>
+          <div class="ce-video-list" id="ce-m01-list"></div>
+          <button class="btn-ce-add" onclick="ceAddVideo('m01')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar video al Módulo 01
+          </button>
+        </div>
+
+        <!-- TAB: Módulo 02 -->
+        <div class="ce-panel" id="ce-m02">
+          <div class="ce-module-header">
+            <div class="ce-module-title-wrap">
+              <span class="ce-module-label">Módulo 02</span>
+              <input class="ce-module-inp" id="ce-m02-title" type="text" placeholder="Título del módulo"/>
+            </div>
+          </div>
+          <div class="ce-video-list" id="ce-m02-list"></div>
+          <button class="btn-ce-add" onclick="ceAddVideo('m02')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar video al Módulo 02
+          </button>
+        </div>
+
+        <!-- TAB: Módulo 03 -->
+        <div class="ce-panel" id="ce-m03">
+          <div class="ce-module-header">
+            <div class="ce-module-title-wrap">
+              <span class="ce-module-label">Módulo 03</span>
+              <input class="ce-module-inp" id="ce-m03-title" type="text" placeholder="Título del módulo"/>
+            </div>
+          </div>
+          <div class="ce-video-list" id="ce-m03-list"></div>
+          <button class="btn-ce-add" onclick="ceAddVideo('m03')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar video al Módulo 03
+          </button>
+        </div>
+
+        <!-- TAB: Módulo 04 -->
+        <div class="ce-panel" id="ce-m04">
+          <div class="ce-module-header">
+            <div class="ce-module-title-wrap">
+              <span class="ce-module-label">Módulo 04</span>
+              <input class="ce-module-inp" id="ce-m04-title" type="text" placeholder="Título del módulo"/>
+            </div>
+          </div>
+          <div class="ce-video-list" id="ce-m04-list"></div>
+          <button class="btn-ce-add" onclick="ceAddVideo('m04')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Agregar video al Módulo 04
+          </button>
+        </div>
+
+        <!-- Barra de guardar -->
+        <div class="ce-save-bar">
+          <span class="ce-save-hint">Los cambios se aplican inmediatamente al guardar</span>
+          <button class="btn-ce-publish" onclick="ceSaveAll()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="13" height="13"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/></svg>
+            Guardar y publicar
+          </button>
+        </div>
+        <div class="ce-msg" id="ce-msg"></div>
       </div>
 
       <div class="adm-grid" id="adm-grid"></div>
@@ -3053,22 +3251,245 @@ function unlockCards() {
 }
 
 /* ─── PLAY VIDEO ─── */
-function playVideo(id) {
-  const videos = {
-    'intro'  : '',
-    'm01v01' : '',
-    'm02v01' : '',
-    'm02v02' : '',
-    'm02v03' : '',
-    'm02v04' : '',
-    'm03v01' : '',
-    'm03v02' : '',
+/* ═══════════════════════════════════════════
+   EDITOR DE CONTENIDO DEL CURSO (Admin)
+   Guarda en localStorage key: jd_course_content
+═══════════════════════════════════════════ */
+
+const CE_KEY = 'jd_course_content';
+
+// Datos por defecto (los que ya están en el HTML)
+const CE_DEFAULTS = {
+  intro: {
+    title: 'Bienvenido al Curso Joss Design',
+    sub  : 'Conoce la metodología, las herramientas y todo lo que aprenderás en este curso de diseño con IA.',
+    url  : ''
+  },
+  m01: {
+    title: 'Manejo de los Prompts en Gemini',
+    videos: [
+      { title: 'Cómo manejar correctamente nuestros prompts', url: '' }
+    ]
+  },
+  m02: {
+    title: 'Diseñando Desde 0 Con IA',
+    videos: [
+      { title: 'Introducción del módulo',                    url: '' },
+      { title: 'Estructura del diseño',                     url: '' },
+      { title: 'Armonización',                              url: '' },
+      { title: 'Integración de información y ajustes finales', url: '' }
+    ]
+  },
+  m03: {
+    title: 'Cómo Incorporar la IA en tus Diseños',
+    videos: [
+      { title: 'Método Joss Design', url: '' },
+      { title: 'Tips con la IA',     url: '' }
+    ]
+  },
+  m04: {
+    title: 'Próximamente',
+    videos: [
+      { title: 'Contenido en preparación', url: '' }
+    ]
+  }
+};
+
+function ceGetContent() {
+  try {
+    const stored = localStorage.getItem(CE_KEY);
+    return stored ? JSON.parse(stored) : JSON.parse(JSON.stringify(CE_DEFAULTS));
+  } catch(e) {
+    return JSON.parse(JSON.stringify(CE_DEFAULTS));
+  }
+}
+
+function ceSaveContent(data) {
+  localStorage.setItem(CE_KEY, JSON.stringify(data));
+}
+
+// Cambiar tab
+function ceSwitchTab(mod, btn) {
+  document.querySelectorAll('.ce-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.ce-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('ce-' + mod).classList.add('active');
+}
+
+// Renderizar lista de videos de un módulo
+function ceRenderModule(mod, videos) {
+  const list = document.getElementById('ce-' + mod + '-list');
+  if (!list) return;
+  list.innerHTML = '';
+  videos.forEach((v, i) => {
+    const item = document.createElement('div');
+    item.className = 'ce-video-item';
+    item.innerHTML = `
+      <span class="ce-ep-badge">EP ${String(i+1).padStart(2,'0')}</span>
+      <div class="ce-video-fields">
+        <input class="ce-inp-title" type="text" placeholder="Título del video"
+          value="${(v.title||'').replace(/"/g,'&quot;')}"
+          oninput="ceUpdateVideo('${mod}',${i},'title',this.value)"/>
+        <input class="ce-inp-url" type="url" placeholder="URL del video (YouTube, Vimeo, Drive...)"
+          value="${(v.url||'').replace(/"/g,'&quot;')}"
+          oninput="ceUpdateVideo('${mod}',${i},'url',this.value)"/>
+      </div>
+      <button class="btn-ce-del" title="Eliminar" onclick="ceDelVideo('${mod}',${i})">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="11" height="11"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>`;
+    list.appendChild(item);
+  });
+}
+
+// Cargar el editor con datos actuales
+function ceLoadEditor() {
+  const data = ceGetContent();
+  // Intro
+  document.getElementById('ce-intro-title').value = data.intro?.title || '';
+  document.getElementById('ce-intro-sub').value   = data.intro?.sub   || '';
+  document.getElementById('ce-intro-url').value   = data.intro?.url   || '';
+  // Módulos
+  ['m01','m02','m03','m04'].forEach(mod => {
+    const m = data[mod] || { title:'', videos:[] };
+    const inp = document.getElementById('ce-' + mod + '-title');
+    if (inp) inp.value = m.title || '';
+    ceRenderModule(mod, m.videos || []);
+  });
+}
+
+// Actualizar un campo de video en memoria temporal
+let ceTemp = null;
+function ceEnsureTemp() {
+  if (!ceTemp) ceTemp = ceGetContent();
+}
+
+function ceUpdateVideo(mod, idx, field, val) {
+  ceEnsureTemp();
+  if (!ceTemp[mod].videos[idx]) ceTemp[mod].videos[idx] = { title:'', url:'' };
+  ceTemp[mod].videos[idx][field] = val;
+}
+
+function ceAddVideo(mod) {
+  ceEnsureTemp();
+  if (!ceTemp[mod]) ceTemp[mod] = { title:'', videos:[] };
+  ceTemp[mod].videos.push({ title:'', url:'' });
+  ceRenderModule(mod, ceTemp[mod].videos);
+  // focus on new title input
+  const list = document.getElementById('ce-' + mod + '-list');
+  const inputs = list.querySelectorAll('.ce-inp-title');
+  if (inputs.length) inputs[inputs.length-1].focus();
+}
+
+function ceDelVideo(mod, idx) {
+  ceEnsureTemp();
+  ceTemp[mod].videos.splice(idx, 1);
+  ceRenderModule(mod, ceTemp[mod].videos);
+}
+
+// Guardar todo y aplicar al sitio
+function ceSaveAll() {
+  ceEnsureTemp();
+  // Leer campos de intro
+  ceTemp.intro = {
+    title: document.getElementById('ce-intro-title').value.trim(),
+    sub  : document.getElementById('ce-intro-sub').value.trim(),
+    url  : document.getElementById('ce-intro-url').value.trim()
   };
-  const url = videos[id];
+  // Leer títulos de módulos
+  ['m01','m02','m03','m04'].forEach(mod => {
+    const inp = document.getElementById('ce-' + mod + '-title');
+    if (inp) ceTemp[mod].title = inp.value.trim();
+  });
+
+  ceSaveContent(ceTemp);
+  ceTemp = null;
+
+  // Aplicar inmediatamente al sitio
+  applyContentToSite();
+
+  const msg = document.getElementById('ce-msg');
+  msg.className = 'ce-msg ok';
+  msg.textContent = '✅ Contenido guardado y publicado correctamente.';
+  setTimeout(() => { msg.className = 'ce-msg'; }, 4000);
+  toast('Contenido actualizado', true);
+}
+
+// Aplicar el contenido guardado al HTML del curso
+function applyContentToSite() {
+  const data = ceGetContent();
+
+  // Intro
+  if (data.intro?.title) {
+    const el = document.querySelector('.intro-title');
+    if (el) el.textContent = data.intro.title;
+  }
+  if (data.intro?.sub) {
+    const el = document.querySelector('.intro-sub');
+    if (el) el.textContent = data.intro.sub;
+  }
+
+  // Módulos
+  const MODS = ['m01','m02','m03','m04'];
+  MODS.forEach((mod, mi) => {
+    const m = data[mod];
+    if (!m) return;
+    const modNum = mi + 1;
+
+    // Actualizar título del módulo
+    const headers = document.querySelectorAll('.module-header');
+    if (headers[mi]) {
+      const titleEl = headers[mi].querySelector('.module-title-text');
+      if (titleEl && m.title) titleEl.textContent = m.title;
+    }
+
+    // Actualizar videos
+    const grids = document.querySelectorAll('.mod-video-grid');
+    if (!grids[mi] || !m.videos) return;
+    const grid = grids[mi];
+    const cards = grid.querySelectorAll('.mod-video-card');
+
+    m.videos.forEach((v, vi) => {
+      if (cards[vi]) {
+        // Actualizar título
+        const h4 = cards[vi].querySelector('h4');
+        if (h4 && v.title) h4.textContent = v.title;
+        // Actualizar EP number
+        const epEl = cards[vi].querySelector('.mod-ep-num');
+        if (epEl) epEl.textContent = 'EP ' + String(vi+1).padStart(2,'0');
+        // Actualizar onclick con nueva URL si existe
+        if (v.url) {
+          cards[vi].setAttribute('onclick', `window.open('${v.url}','_blank')`);
+          cards[vi].classList.remove('locked');
+        }
+      }
+    });
+  });
+}
+
+// Cargar editor cuando se abre el panel admin
+function openAdminPanelWithEditor() {
+  openAdminPanel();
+  setTimeout(ceLoadEditor, 100);
+}
+
+function playVideo(id) {
+  const data = ceGetContent();
+  const urlMap = {
+    'intro'  : data.intro?.url,
+    'm01v01' : data.m01?.videos?.[0]?.url,
+    'm02v01' : data.m02?.videos?.[0]?.url,
+    'm02v02' : data.m02?.videos?.[1]?.url,
+    'm02v03' : data.m02?.videos?.[2]?.url,
+    'm02v04' : data.m02?.videos?.[3]?.url,
+    'm03v01' : data.m03?.videos?.[0]?.url,
+    'm03v02' : data.m03?.videos?.[1]?.url,
+    'm04v01' : data.m04?.videos?.[0]?.url,
+  };
+  const url = urlMap[id] || '';
   if (url) {
     window.open(url, '_blank');
   } else {
-    toast('Video disponible próximamente', false);
+    toast('Video disponible próximamente 🎬', false);
   }
 }
 
@@ -3326,6 +3747,8 @@ function checkAdminPass() {
 function openAdminPanel() {
   document.getElementById('admin-panel').classList.add('show');
   renderAdmin();
+  // Cargar editor de contenido
+  setTimeout(ceLoadEditor, 50);
   const el = document.getElementById('adm-time');
   const tick = () => el.textContent = new Date().toLocaleString('es', { weekday:'short', day:'2-digit', month:'short', hour:'2-digit', minute:'2-digit' });
   tick();
@@ -3586,9 +4009,9 @@ function changeAdminPwd() {
     lockCards();
   }
   refreshPrices();
-  checkIzipayReturn(); // detect return from Izipay checkout
+  checkIzipayReturn();
+  applyContentToSite(); // aplicar URLs y títulos guardados
 
-  // Wire country selector → currency converter
   const countryEl = document.getElementById('b-country');
   if (countryEl) {
     countryEl.addEventListener('change', function() {
